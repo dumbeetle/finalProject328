@@ -1,23 +1,15 @@
 $(document).ready(function(){
-    $("input").click(function(){
-        var select;
-        var questions=document.getElementsByName("sales");
-        for(var i =0;i<questions.length;i++){
-            if(questions[i].checked == true){
-                select = questions[i].value;
-                if(select=="EUNA"){
-                    runNAEU();
-                }else if(select=="JNA"){
-                    runJNA();
-                }else if(select=="JEU"){
-                    runJEU();
-                }
-            }
-
-            }
-
-
+    $(".euna").click(function () {
+        runNAEU()
     });
+    $(".jeu").click(function () {
+        runJEU();
+    });
+    $(".jna").click(function () {
+        runJNA()
+    });
+
+
 
 
 });
