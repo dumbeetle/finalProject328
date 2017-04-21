@@ -1,6 +1,15 @@
+
 document.querySelector("#fullTimeline").addEventListener("click", displayFullTimeline)
 
 document.querySelector("#top50Timeline").addEventListener("click", displayTopTimeline)
+
+//global sizes
+var body = d3.select('body');
+var margin = {top: 200, right: 200, bottom: 200, left: 200};
+var h = 800 - margin.top - margin.bottom;
+var w = 900 - margin.left - margin.right;
+//Colors for the years
+var COLORS = ["#7fc97c", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f"];
 
 
 function displayFullTimeline() {
@@ -8,11 +17,7 @@ function displayFullTimeline() {
         //remove previous SVG element
         d3.selectAll('svg').remove();
         
-        //size variables
-        var body = d3.select('body');
-        var margin = {top: 200, right: 200, bottom: 200, left: 200};
-        var h = 800 - margin.top - margin.bottom;
-        //var w = 900 - margin.left - margin.right;
+        //size variables        
         var w = (data.length *3) + 6
         var BAR_WIDTH = 2
         var maxSales = 0;
@@ -23,8 +28,7 @@ function displayFullTimeline() {
         var years = data.sort(function(x,y) {
             return d3.ascending(x.Year_of_Release, y.Year_of_Release)
         })
-        //Colors for the years
-        var COLORS = ["#7fc97c", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f"];
+
         //create scales based on data
         var xScale = d3.scale.linear()
             .domain(d3.extent(data, function(d) {
@@ -89,23 +93,9 @@ function displayFullTimeline() {
             })
             .on('mouseover', function(d,i){
                 d3.select(this).attr('fill', '#bf5b17')
-        
-                var coords = d3.mouse(d3.select('svg').node());
-					
-                d3.select('g').append('text')
-                    .attr('class', 'hoverText')
-                    .html(d.Name)
-                    .attr('x', i*(BAR_WIDTH + 1))
-                    .attr('y', h - (d.Global_Sales / maxSales) * h - 18)
-                d3.select('g').append('text')
-                    .attr('class', 'hoverText')
-                    .html("$" + d.Global_Sales + " million")
-                    .attr('x', i*(BAR_WIDTH + 1))
-                    .attr('y', h - (d.Global_Sales / maxSales) * h - 5)
                     
             })
             .on('mouseout', function(d){
-                d3.selectAll(".hoverText").remove()
                 
                 //until dynamiColor is sorted out....
                 if (d.Year_of_Release == 1996) {
@@ -125,9 +115,12 @@ function displayFullTimeline() {
                 }
                     
             })
-            .append('title') //tooltip
+            .append('title')
             .text(function(d){
-                return d.Name
+                return d.Name +
+                    '\nRelase Year: ' + d.Year_of_Release +
+                    '\nGenre: ' + d.Genre+
+                    '\nGlobal Sales: $' + d.Global_Sales + ' million'
             })
         //X-Axis
         svg.append('g')
@@ -163,9 +156,8 @@ function displayTopTimeline() {
         d3.selectAll('svg').remove();
             
         //size variables
-        var body = d3.select('body');;
-        var margin = {top: 200, right: 200, bottom: 200, left: 200};
-            //take top 50 sales
+
+        //take top 50 sales
         var top = []
                 for(var i=0; i<50; i++){
                     top.push(data[i])
@@ -175,8 +167,6 @@ function displayTopTimeline() {
         var years = top.sort(function(x,y) {
             return d3.ascending(x.Year_of_Release, y.Year_of_Release)
         })
-        var h = 800 - margin.top - margin.bottom;
-        //var w = 900 - margin.left - margin.right;
         var w = (years.length *13) + 6
         var BAR_WIDTH = 12
         var maxSales = 0;
@@ -184,8 +174,6 @@ function displayTopTimeline() {
                 maxSales = Math.max(maxSales, data[i].Global_Sales)
             }
         
-        //Colors for the years
-        var COLORS = ["#7fc97c", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f"];
         //create scales based on data
         var xScale = d3.scale.linear()
             .domain(d3.extent(years, function(d) {
@@ -251,22 +239,8 @@ function displayTopTimeline() {
             .on('mouseover', function(d,i){
                 d3.select(this).attr('fill', '#bf5b17')
         
-                var coords = d3.mouse(d3.select('svg').node());
-					
-                d3.select('g').append('text')
-                    .attr('class', 'hoverText')
-                    .html(d.Name)
-                    .attr('x', i*(BAR_WIDTH + 1))
-                    .attr('y', h - (d.Global_Sales / maxSales) * h - 18)
-                d3.select('g').append('text')
-                    .attr('class', 'hoverText')
-                    .html("$" + d.Global_Sales + " million")
-                    .attr('x', i*(BAR_WIDTH + 1))
-                    .attr('y', h - (d.Global_Sales / maxSales) * h - 5)
-                    
             })
             .on('mouseout', function(d){
-                d3.selectAll(".hoverText").remove()
                 
                 //until dynamiColor is sorted out....
                 if (d.Year_of_Release == 1996) {
@@ -285,6 +259,13 @@ function displayTopTimeline() {
                     d3.select(this).attr('fill', COLORS[6])
                 }
                     
+            })
+            .append('title')
+            .text(function(d){
+                return d.Name +
+                    '\nRelease Year: ' + d.Year_of_Release +
+                    '\nGenre: ' + d.Genre+
+                    '\nGlobal Sales: $' + d.Global_Sales + ' million'
             })
             
         //X-Axis
@@ -316,6 +297,4 @@ function displayTopTimeline() {
 } //End of displayTopTimeline
 
 displayFullTimeline();
-
-
 
