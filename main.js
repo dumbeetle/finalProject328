@@ -96,8 +96,8 @@ d3.csv('VGDATAclean.csv', function (data) {
             .text(function (d) { return d.Name +
                 '\nYear: ' + d.Year_of_Release+
                 '\nGenre: ' + d.Genre+
-                '\nNorth American Sales: ' + d.NA_Sales+
-                '\nEuropean Sales: ' + d.EU_Sales
+                '\nNorth American Sales: $' + d.NA_Sales+ 
+                '\nEuropean Sales: $' + d.EU_Sales
             });
         // X-axis
         svg.append('g')
@@ -193,8 +193,8 @@ function runJEU(){
             .text(function (d) { return d.Name +
                 '\nYear: ' + d.Year_of_Release+
                 '\nGenre: ' + d.Genre+
-                '\nNorth American Sales: ' + d.JP_Sales+
-                '\nEuropean Sales: ' + d.EU_Sales
+                '\nNorth American Sales: $' + d.JP_Sales+
+                '\nEuropean Sales: $' + d.EU_Sales
             });
         // X-axis
         svg.append('g')
@@ -291,8 +291,8 @@ function runJNA(){
             .text(function (d) { return d.Name +
                 '\nYear: ' + d.Year_of_Release+
                 '\nGenre: ' + d.Genre+
-                '\nNorth American Sales: ' + d.NA_Sales+
-                '\nEuropean Sales: ' + d.EU_Sales
+                '\nNorth American Sales: $' + d.NA_Sales+
+                '\nEuropean Sales: $' + d.EU_Sales
             });
         // X-axis
         svg.append('g')
