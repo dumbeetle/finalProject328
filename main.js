@@ -28,10 +28,11 @@ function runNAEU(){
 //get all data from csv
     d3.csv('VGDATAclean.csv', function (data) {
         // create variables for the sizes
-        var body = d3.select('body');
+          // changing selector to #chartSales as DOM element -clinton
+        var chartSales = d3.select('#chartSales');
         var margin = { top: 200, right: 200, bottom: 200, left: 200 };
         var h = 900- margin.top - margin.bottom;
-        var w = 900 - margin.left - margin.right;
+        var w = 1200 - margin.left - margin.right;
         //create a scale based on the size of the data
         var colorScale = d3.scale.category20();
         var xScale = d3.scale.linear()
@@ -47,7 +48,7 @@ function runNAEU(){
             ])
             .range([h,0]);
         // SVG
-        var svg = body.append('svg')
+        var svg = chartSales.append('svg')
             .attr('height',h + margin.top + margin.bottom)
             .attr('width',w + margin.left + margin.right)
             .append('g')
@@ -125,10 +126,12 @@ function runNAEU(){
 function runJEU(){
     d3.csv('VGDATAclean.csv', function (data) {
         // create variables for the sizes
-        var body = d3.select('body');
+          // changing selector to #chartSales as DOM element -clinton
+        var chartSales = d3.select('#chartSales');
+
         var margin = { top: 100, right: 100, bottom: 200, left: 200 };
         var h = 900- margin.top - margin.bottom;
-        var w = 900 - margin.left - margin.right;
+        var w = 1200 - margin.left - margin.right;
         //create a scale based on the size of the data
         var colorScale = d3.scale.category20();
         var xScale = d3.scale.linear()
@@ -144,7 +147,7 @@ function runJEU(){
             ])
             .range([h,0]);
         // SVG
-        var svg = body.append('svg')
+        var svg = chartSales.append('svg')
             .attr('height',h + margin.top + margin.bottom)
             .attr('width',w + margin.left + margin.right)
             .append('g')
@@ -223,10 +226,11 @@ function runJEU(){
 function runJNA(){
     d3.csv('VGDATAclean.csv', function (data) {
         // create variables for the sizes
-        var body = d3.select('body');
+        // changing selector to #chartSales as DOM element -clinton
+        var chartSales = d3.select('#chartSales');
         var margin = { top: 200, right: 200, bottom: 200, left: 200 };
         var h = 900- margin.top - margin.bottom;
-        var w = 900 - margin.left - margin.right;
+        var w = 1200 - margin.left - margin.right;
         //create a scale based on the size of the data
         var colorScale = d3.scale.category20();
         var xScale = d3.scale.linear()
@@ -242,7 +246,7 @@ function runJNA(){
             ])
             .range([h,0]);
         // SVG
-        var svg = body.append('svg')
+        var svg = chartSales.append('svg')
             .attr('height',h + margin.top + margin.bottom)
             .attr('width',w + margin.left + margin.right)
             .append('g')
