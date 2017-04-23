@@ -14,6 +14,9 @@ $(document).ready(function(){
 
 });
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 
 
 
@@ -123,7 +126,7 @@ function runJEU(){
     d3.csv('VGDATAclean.csv', function (data) {
         // create variables for the sizes
         var body = d3.select('body');
-        var margin = { top: 200, right: 200, bottom: 200, left: 200 };
+        var margin = { top: 100, right: 100, bottom: 200, left: 200 };
         var h = 900- margin.top - margin.bottom;
         var w = 900 - margin.left - margin.right;
         //create a scale based on the size of the data
