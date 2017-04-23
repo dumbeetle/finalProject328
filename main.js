@@ -268,7 +268,7 @@ function runJNA(){
             .enter()
             .append('circle')
             .attr('cx',function (d) { return xScale(d.NA_Sales) })
-            .attr('cy',function (d) { return yScale(d.EU_Sales) })
+            .attr('cy',function (d) { return yScale(d.JP_Sales) })
             .attr('r','10')
             .attr('stroke','black')
             .attr('stroke-width',1)
@@ -292,7 +292,7 @@ function runJNA(){
                 '\nYear: ' + d.Year_of_Release+
                 '\nGenre: ' + d.Genre+
                 '\nNorth American Sales: $' + d.NA_Sales+
-                '\nEuropean Sales: $' + d.EU_Sales
+                '\nJapanese Sales: $' + d.JP_Sales
             });
         // X-axis
         svg.append('g')
