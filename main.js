@@ -8,11 +8,14 @@ $(document).ready(function(){
     $(".jna").click(function () {
         runJNA()
     });
-
-
-
-
 });
+
+// adding global variables to streamline each function -clinton
+var margin = {top: 200, right: 200, bottom: 200, left: 200};
+// shrank your global margins -clinton
+var h = 900 - margin.top - margin.bottom;
+var w = 1200 - margin.left - margin.right;
+
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -26,14 +29,13 @@ function runNAEU(){
      * Created by weapo on 4/12/2017.
      */
 //get all data from csv
-    d3.csv('VGDATAclean.csv', function (data) {
-        // create variables for the sizes
-          // changing selector to #chartSales as DOM element -clinton
-        var chartSales = d3.select('#chartSales');
-        var margin = { top: 200, right: 200, bottom: 200, left: 200 };
-        var h = 900- margin.top - margin.bottom;
-        var w = 1200 - margin.left - margin.right;
-        //create a scale based on the size of the data
+d3.csv('VGDATAclean.csv', function (data) {
+    // create variables for the sizes
+      // changing selector to #chartSales as DOM element -clinton
+    var chartSales = d3.select('#chartSales');
+    d3.selectAll('svg').remove();
+    // adding remove method from timeline.js so only one chart is displayed - clinton
+    // create variables for the sizes -depreciated by global variable - clinton
         var colorScale = d3.scale.category20();
         var xScale = d3.scale.linear()
             .domain([
@@ -128,11 +130,9 @@ function runJEU(){
         // create variables for the sizes
           // changing selector to #chartSales as DOM element -clinton
         var chartSales = d3.select('#chartSales');
-
-        var margin = { top: 100, right: 100, bottom: 200, left: 200 };
-        var h = 900- margin.top - margin.bottom;
-        var w = 1200 - margin.left - margin.right;
-        //create a scale based on the size of the data
+        d3.selectAll('svg').remove();
+        // adding remove method from timeline.js so only one chart is displayed - clinton
+        // create variables for the sizes -depreciated by global variable - clinton
         var colorScale = d3.scale.category20();
         var xScale = d3.scale.linear()
             .domain([
@@ -224,14 +224,13 @@ function runJEU(){
 }
 
 function runJNA(){
-    d3.csv('VGDATAclean.csv', function (data) {
-        // create variables for the sizes
+  d3.csv('VGDATAclean.csv', function (data) {
+      // create variables for the sizes
         // changing selector to #chartSales as DOM element -clinton
-        var chartSales = d3.select('#chartSales');
-        var margin = { top: 200, right: 200, bottom: 200, left: 200 };
-        var h = 900- margin.top - margin.bottom;
-        var w = 1200 - margin.left - margin.right;
-        //create a scale based on the size of the data
+      var chartSales = d3.select('#chartSales');
+      d3.selectAll('svg').remove();
+      // adding remove method from timeline.js so only one chart is displayed - clinton
+      // create variables for the sizes -depreciated by global variable - clinton
         var colorScale = d3.scale.category20();
         var xScale = d3.scale.linear()
             .domain([

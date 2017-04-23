@@ -1,13 +1,20 @@
-
-document.querySelector("#fullTimeline").addEventListener("click", displayFullTimeline)
-
-document.querySelector("#top50Timeline").addEventListener("click", displayTopTimeline)
+$(document).ready(function(){
+    $("#top50Timeline").click(function () {
+        displayTopTimeline();
+    });
+    $("#displayFullTimeline").click(function () {
+        displayFullTimeline();
+    });
+});
 
 //global sizes
-var body = d3.select('body');
+// changed selectors -clinton
+var chartYears = d3.select('#chartYears');
 var margin = {top: 200, right: 200, bottom: 200, left: 200};
+// shrank your global margins -clinton
 var h = 800 - margin.top - margin.bottom;
 var w = 900 - margin.left - margin.right;
+// resized chart height/width so all graphs are same size - clinton
 //Colors for the years
 var COLORS = ["#7fc97c", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f"];
 
@@ -16,8 +23,8 @@ function displayFullTimeline() {
     d3.csv('VGDATAclean.csv', function(data) {
         //remove previous SVG element
         d3.selectAll('svg').remove();
-        
-        //size variables        
+
+        //size variables
         var w = (data.length *3) + 6
         var BAR_WIDTH = 2
         var maxSales = 0;
@@ -36,14 +43,14 @@ function displayFullTimeline() {
             }))
             .range([0,w]);
         var yScale = d3.scale.linear()
-            .domain([ 
+            .domain([
                 d3.max([0,d3.max(data, function(d) { return d.Global_Sales})]),
                 d3.min([0, d3.min(data, function(d){ return d.Global_Sales})])
             ])
             .range([0,h])
-        
+
         //SVG
-        var svg = body.append('svg')
+        var svg = chartYears.append('svg')
             .attr('height', h + margin.top + margin.bottom)
             .attr('width', w + margin.left + margin.right)
             .append('g')
@@ -73,7 +80,7 @@ function displayFullTimeline() {
                 return h - (d.Global_Sales / maxSales) * h
             })
             .attr('height', function(d){
-                return (d.Global_Sales / maxSales)* h 
+                return (d.Global_Sales / maxSales)* h
             })
             .attr('width', BAR_WIDTH)
             .attr('fill', function(d){
@@ -93,10 +100,10 @@ function displayFullTimeline() {
             })
             .on('mouseover', function(d,i){
                 d3.select(this).attr('fill', '#bf5b17')
-                    
+
             })
             .on('mouseout', function(d){
-                
+
                 //until dynamiColor is sorted out....
                 if (d.Year_of_Release == 1996) {
                      d3.select(this).attr('fill', COLORS[0])
@@ -113,7 +120,7 @@ function displayFullTimeline() {
                 } else {
                     d3.select(this).attr('fill', COLORS[6])
                 }
-                    
+
             })
             .append('title')
             .text(function(d){
@@ -146,7 +153,7 @@ function displayFullTimeline() {
             .attr('dy','.71em')
             .style('text-anchor','end')
             .text('Global sales in Millions')
-        
+
     })
 } //End of displayFullTimeline
 
@@ -154,15 +161,15 @@ function displayTopTimeline() {
         d3.csv('VGDATAclean.csv', function(data) {
         //remove previous SVG element
         d3.selectAll('svg').remove();
-            
+
         //size variables
 
         //take top 50 sales
         var top = []
                 for(var i=0; i<50; i++){
                     top.push(data[i])
-                }            
-            
+                }
+
         //sort data by year
         var years = top.sort(function(x,y) {
             return d3.ascending(x.Year_of_Release, y.Year_of_Release)
@@ -173,7 +180,7 @@ function displayTopTimeline() {
             for (var i=0; i<data.length; i++){
                 maxSales = Math.max(maxSales, data[i].Global_Sales)
             }
-        
+
         //create scales based on data
         var xScale = d3.scale.linear()
             .domain(d3.extent(years, function(d) {
@@ -181,14 +188,14 @@ function displayTopTimeline() {
             }))
             .range([0,w]);
         var yScale = d3.scale.linear()
-            .domain([ 
+            .domain([
                 d3.max([0,d3.max(data, function(d) { return d.Global_Sales})]),
                 d3.min([0, d3.min(data, function(d){ return d.Global_Sales})])
             ])
             .range([0,h])
-        
+
         //SVG
-        var svg = body.append('svg')
+        var svg = chartYears.append('svg')
             .attr('height', h + margin.top + margin.bottom)
             .attr('width', w + margin.left + margin.right)
             .append('g')
@@ -218,7 +225,7 @@ function displayTopTimeline() {
                 return h - (d.Global_Sales / maxSales) * h
             })
             .attr('height', function(d){
-                return (d.Global_Sales / maxSales)* h 
+                return (d.Global_Sales / maxSales)* h
             })
             .attr('width', BAR_WIDTH)
             .attr('fill', function(d){
@@ -238,10 +245,10 @@ function displayTopTimeline() {
             })
             .on('mouseover', function(d,i){
                 d3.select(this).attr('fill', '#bf5b17')
-        
+
             })
             .on('mouseout', function(d){
-                
+
                 //until dynamiColor is sorted out....
                 if (d.Year_of_Release == 1996) {
                      d3.select(this).attr('fill', COLORS[0])
@@ -258,7 +265,7 @@ function displayTopTimeline() {
                 } else {
                     d3.select(this).attr('fill', COLORS[6])
                 }
-                    
+
             })
             .append('title')
             .text(function(d){
@@ -267,7 +274,7 @@ function displayTopTimeline() {
                     '\nGenre: ' + d.Genre+
                     '\nGlobal Sales: $' + d.Global_Sales + ' million'
             })
-            
+
         //X-Axis
         svg.append('g')
             .attr('class', 'axis')
@@ -292,9 +299,8 @@ function displayTopTimeline() {
             .attr('dy','.71em')
             .style('text-anchor','end')
             .text('Global sales in Millions')
-        
+
     })
 } //End of displayTopTimeline
-
-displayFullTimeline();
-
+// removed automatic call- now triggered by buttons on the dom with ID selectors
+// displayFullTimeline();

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="bootstrap-3.3.7\dist\css\bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+<!-- <<<<<<< HEAD -->
+    <title>328 Project</title>
+<!-- ======= -->
+    <title></title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+<!-- >>>>>>> origin/master -->
+</head>
+<body>
+  <!-- nav begin  -->
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="internationalSales.html">Sales Figures </a></li>
+            <li class="active"><a href="salesbyyear.html">Timeline</a></li>
+    </ul>
+  </nav>
+<!-- end nav -->
+
+<div class="container-fluid divYears"> 
+  <h1>N64 Game Sales By The Years</h1>
+    <div class="btn-group btn-group-lg" role="group" aria-label="...">
+      <!-- functions from timeline.js initated by ID button click -->
+      <button class="btn btn-default" id="displayFullTimeline" >Full Timeline</button>
+      <button class="btn btn-default" id="top50Timeline" >Top Timeline</button>
+    </div>
+</div>
+
+<div id="chartYears">
+
+
+</div>
+
+
+<script src="lib/d3.min.js"></script>
+<script src="lib/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="main.js"></script>
+<script src="timeline.js"></script>
+</body>
+</html>
