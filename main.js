@@ -317,6 +317,6 @@ function runJNA(){
             .attr('y',-50)
             .attr('dy','.71em')
             .style('text-anchor','end')
-            .text('European Sales by Millions')
+            .text('Japanese Sales by Millions')
     });
 }
