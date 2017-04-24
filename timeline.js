@@ -16,8 +16,8 @@ var h = 800 - margin.top - margin.bottom;
 var w = 900 - margin.left - margin.right;
 // resized chart height/width so all graphs are same size - clinton
 //Colors for the years
-var COLORS = ["#7fc97c", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f"];
-
+var COLORS = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33","#f781bf"];
+var RELEASE = [1996,1997,1998,1999,2000,2001,2002];
 
 function displayFullTimeline() {
     d3.csv('VGDATAclean.csv', function(data) {
@@ -59,7 +59,7 @@ function displayFullTimeline() {
         var xAxis = d3.svg.axis()
             .scale(xScale)
             .tickFormat(d3.format('d'))
-            .ticks(7)
+            .ticks(0)
             .orient('bottom');
         //y-axis
         var yAxis = d3.svg.axis()
@@ -96,6 +96,8 @@ function displayFullTimeline() {
                 return COLORS[4]
             } else if (d.Year_of_Release == 2001){
                 return COLORS[5]
+            } else {
+                return COLORS[6]
             }
             })
             .on('mouseover', function(d,i){
@@ -129,6 +131,27 @@ function displayFullTimeline() {
                     '\nGenre: ' + d.Genre+
                     '\nGlobal Sales: $' + d.Global_Sales + ' million'
             })
+        
+        //add Legend
+        var legend = svg.selectAll('.legend')
+            .data(years)
+            .enter()
+            .append('g')
+            .attr('class', 'legend')
+            .attr('transform', 'translate(' + (w-100) +',50)')
+ 
+            for(var q=0; q<RELEASE.length;q++){
+                legend.append('rect')
+                    .attr('y', (q*18))
+                    .attr('height', 15)
+                    .attr('width', 15)
+                    .attr('fill', COLORS[q])
+                legend.append('text')
+                    .attr('x', 18)
+                    .attr('y', (q*18) +10)
+                    .text(RELEASE[q])
+                    
+            } 
         //X-Axis
         svg.append('g')
             .attr('class', 'axis')
@@ -241,6 +264,8 @@ function displayTopTimeline() {
                 return COLORS[4]
             } else if (d.Year_of_Release == 2001){
                 return COLORS[5]
+            } else {
+                return COLORS[6]
             }
             })
             .on('mouseover', function(d,i){
@@ -274,6 +299,27 @@ function displayTopTimeline() {
                     '\nGenre: ' + d.Genre+
                     '\nGlobal Sales: $' + d.Global_Sales + ' million'
             })
+        
+        //add Legend
+        var legend = svg.selectAll('.legend')
+            .data(years)
+            .enter()
+            .append('g')
+            .attr('class', 'legend')
+            .attr('transform', 'translate(' + (w-100) +',50)')
+ 
+            for(var q=0; q<RELEASE.length;q++){
+                legend.append('rect')
+                    .attr('y', (q*18))
+                    .attr('height', 15)
+                    .attr('width', 15)
+                    .attr('fill', COLORS[q])
+                legend.append('text')
+                    .attr('x', 18)
+                    .attr('y', (q*18) +10)
+                    .text(RELEASE[q])
+                    
+            } 
 
         //X-Axis
         svg.append('g')
