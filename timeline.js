@@ -151,7 +151,14 @@ function displayFullTimeline() {
                     .attr('y', (q*18) +10)
                     .text(RELEASE[q])
                     
-            } 
+            }         
+        //add Chart title
+        svg.append("text")
+            .attr("x", (w/ 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("text-decoration", "underline")  
+            .text("Sales timeline of all N64 Games titles");
         //X-Axis
         svg.append('g')
             .attr('class', 'axis')
@@ -320,6 +327,14 @@ function displayTopTimeline() {
                     .text(RELEASE[q])
                     
             } 
+        
+        //add Chart title
+        svg.append("text")
+            .attr("x", (w/ 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("text-decoration", "underline")  
+            .text("Sales timeline of 50 Top-Grossing N64 Games");
 
         //X-Axis
         svg.append('g')
