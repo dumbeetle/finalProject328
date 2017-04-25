@@ -96,7 +96,7 @@ d3.csv('VGDATAclean.csv', function (data) {
             .text(function (d) { return d.Name +
                 '\nYear: ' + d.Year_of_Release+
                 '\nGenre: ' + d.Genre+
-                '\nNorth American Sales: $' + d.NA_Sales+ 
+                '\nNorth American Sales: $' + d.NA_Sales+
                 '\nEuropean Sales: $' + d.EU_Sales
             });
         // X-axis
