@@ -54,7 +54,7 @@ d3.csv('VGDATAclean.csv', function (data) {
                 d3.min([0,d3.min(data,function (d) { return d.NA_Sales })]),
                 d3.max([0,d3.max(data,function (d) { return d.NA_Sales })])
             ])
-            .range([,w]);
+            .range([0,w]);
         var yScale = d3.scale.linear()
             .domain([
                 d3.min([0,d3.min(data,function (d) { return d.NA_Sales})]),
