@@ -1,19 +1,28 @@
 $(document).ready(function(){
     $("#top50Timeline").click(function () {
         displayTopTimeline();
+        $("#displayFullTimeline").removeClass("active");
+        $("#top50Timeline").addClass("active");
     });
     $("#displayFullTimeline").click(function () {
+      $("#top50Timeline").removeClass("active");
+      $("#displayFullTimeline").addClass("active");
         displayFullTimeline();
     });
 });
 
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 //global sizes
 // changed selectors -clinton
 var chartYears = d3.select('#chartYears');
-var margin = {top: 200, right: 200, bottom: 200, left: 200};
+var margin = {top: 100, right: 100, bottom: 100, left: 100};
 // shrank your global margins -clinton
-var h = 800 - margin.top - margin.bottom;
-var w = 900 - margin.left - margin.right;
+var h = 600 - margin.top - margin.bottom;
+var w = 1200 - margin.left - margin.right;
 // resized chart height/width so all graphs are same size - clinton
 //Colors for the years
 var COLORS = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33","#f781bf"];
@@ -25,8 +34,8 @@ function displayFullTimeline() {
         d3.selectAll('svg').remove();
 
         //size variables
-        var w = (data.length *3) + 6
-        var BAR_WIDTH = 2
+        var w = (data.length * 5) + 6;
+        var BAR_WIDTH = 5;
         var maxSales = 0;
             for (var i=0; i<data.length; i++){
                 maxSales = Math.max(maxSales, data[i].Global_Sales)
@@ -55,11 +64,12 @@ function displayFullTimeline() {
             .attr('width', w + margin.left + margin.right)
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
         //x-axis
         var xAxis = d3.svg.axis()
             .scale(xScale)
             .tickFormat(d3.format('d'))
-            .ticks(0)
+            .ticks(4)
             .orient('bottom');
         //y-axis
         var yAxis = d3.svg.axis()
@@ -74,7 +84,7 @@ function displayFullTimeline() {
             .append('rect')
             .attr('transform', 'translate(3,0)')
             .attr('x', function(d, i){
-                return i*(BAR_WIDTH + 1)
+                return i*(BAR_WIDTH + 5)
             })
             .attr('y', function(d){
                 return h - (d.Global_Sales / maxSales) * h
@@ -130,8 +140,10 @@ function displayFullTimeline() {
                     '\nRelase Year: ' + d.Year_of_Release +
                     '\nGenre: ' + d.Genre+
                     '\nGlobal Sales: $' + d.Global_Sales + ' million'
-            })
-        
+
+
+            });
+
         //add Legend
         var legend = svg.selectAll('.legend')
             .data(years)
@@ -139,7 +151,7 @@ function displayFullTimeline() {
             .append('g')
             .attr('class', 'legend')
             .attr('transform', 'translate(' + (w-100) +',50)')
- 
+
             for(var q=0; q<RELEASE.length;q++){
                 legend.append('rect')
                     .attr('y', (q*18))
@@ -150,14 +162,14 @@ function displayFullTimeline() {
                     .attr('x', 18)
                     .attr('y', (q*18) +10)
                     .text(RELEASE[q])
-                    
-            }         
+
+            }
         //add Chart title
         svg.append("text")
             .attr("x", (w/ 2))
-            .attr("text-anchor", "middle")  
-            .style("font-size", "16px") 
-            .style("text-decoration", "underline")  
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("text-decoration", "underline")
             .text("Sales timeline of all N64 Games titles");
         //X-Axis
         svg.append('g')
@@ -182,6 +194,7 @@ function displayFullTimeline() {
             .attr('y',-50)
             .attr('dy','.71em')
             .style('text-anchor','end')
+
             .text('Global sales in Millions')
 
     })
@@ -306,7 +319,7 @@ function displayTopTimeline() {
                     '\nGenre: ' + d.Genre+
                     '\nGlobal Sales: $' + d.Global_Sales + ' million'
             })
-        
+
         //add Legend
         var legend = svg.selectAll('.legend')
             .data(years)
@@ -314,7 +327,7 @@ function displayTopTimeline() {
             .append('g')
             .attr('class', 'legend')
             .attr('transform', 'translate(' + (w-100) +',50)')
- 
+
             for(var q=0; q<RELEASE.length;q++){
                 legend.append('rect')
                     .attr('y', (q*18))
@@ -325,15 +338,15 @@ function displayTopTimeline() {
                     .attr('x', 18)
                     .attr('y', (q*18) +10)
                     .text(RELEASE[q])
-                    
-            } 
-        
+
+            }
+
         //add Chart title
         svg.append("text")
             .attr("x", (w/ 2))
-            .attr("text-anchor", "middle")  
-            .style("font-size", "16px") 
-            .style("text-decoration", "underline")  
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("text-decoration", "underline")
             .text("Sales timeline of 50 Top-Grossing N64 Games");
 
         //X-Axis

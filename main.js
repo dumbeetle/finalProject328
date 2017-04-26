@@ -1,17 +1,29 @@
 $(document).ready(function(){
     $(".euna").click(function () {
-        runNAEU()
+      $(".jeu").removeClass("active");
+      $(".jna").removeClass("active");
+      // add class to the one we clicked
+      $(this).addClass("active");
+        runNAEU();
     });
     $(".jeu").click(function () {
+      $(".jna").removeClass("active");
+      $(".euna").removeClass("active");
+     // add class to the one we clicked
+     $(this).addClass("active");
         runJEU();
     });
     $(".jna").click(function () {
+      $(".jeu").removeClass("active");
+      $(".euna").removeClass("active");
+     // add class to the one we clicked
+     $(this).addClass("active");
         runJNA()
     });
 });
 
 // adding global variables to streamline each function -clinton
-var margin = {top: 200, right: 200, bottom: 200, left: 200};
+var margin = {top: 100, right: 100, bottom: 100, left: 100};
 // shrank your global margins -clinton
 var h = 900 - margin.top - margin.bottom;
 var w = 1200 - margin.left - margin.right;
@@ -42,7 +54,7 @@ d3.csv('VGDATAclean.csv', function (data) {
                 d3.min([0,d3.min(data,function (d) { return d.NA_Sales })]),
                 d3.max([0,d3.max(data,function (d) { return d.NA_Sales })])
             ])
-            .range([0,w]);
+            .range([,w]);
         var yScale = d3.scale.linear()
             .domain([
                 d3.min([0,d3.min(data,function (d) { return d.NA_Sales})]),
@@ -76,21 +88,21 @@ d3.csv('VGDATAclean.csv', function (data) {
             .attr('cy',function (d) { return yScale(d.EU_Sales) })
             .attr('r','10')
             .attr('stroke','black')
-            .attr('stroke-width',1)
+            .attr('stroke-width',0.8)
             .attr('fill',function (d,i) { return colorScale(i) })
             .on('mouseover', function () {
                 d3.select(this)
                     .transition()
                     .duration(500)
                     .attr('r',20)
-                    .attr('stroke-width',3)
+                    .attr('stroke-width',0)
             })
             .on('mouseout', function () {
                 d3.select(this)
                     .transition()
                     .duration(500)
                     .attr('r',10)
-                    .attr('stroke-width',1)
+                    .attr('stroke-width',0)
             })
             .append('title') // Tooltip
             .text(function (d) { return d.Name +

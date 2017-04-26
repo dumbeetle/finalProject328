@@ -1,24 +1,23 @@
 // out: ../css/styles.css, compress: true
 // main: ../css/foundation.less
+@import "../css/mixins.less";
+// this is a command I use in the Atom editor to autocompile .less files
+@font-face {
+      font-family: "Nintender",cursive;
+      src: url("../lib/Nintender.ttf");
+    }
 
-// this is a command I use in the Atom editor to autocompile .less files - plox ignore
-
-
-
-
-
-// removing browser margins
 * {
-  margin:0
+  margin:0px;
 }
 
 body {
   height:100%;
   width:100%;
+  background:url("../lib/white_brick_wall/white_brick_wall.png");
 }
 // base container
 .container {
-
 width:100%;
 height:100%;
 color:blue;
@@ -42,8 +41,63 @@ img {
 }
 .divYears{
   text-align: center;
-  
+
 }
 .jumbotron {
   text-align:center;
+}
+
+h1 {
+  font-family: "Nintender";
+  .text-shadow;
+}
+.active {
+  background-color:#185a9d;
+}
+.btn-default {
+.gradient;
+.border-radiuses;
+color:white;
+font-family: "Nintender";
+}
+.btn-default:hover {
+  .transition;
+}
+.button {
+  color:white;
+}
+
+rect:hover {
+  .transition;
+  cursor:pointer;
+}
+circle {
+  cursor:pointer;
+}
+.corners {
+  background: #f6f6f6;
+  margin: 10px auto;
+  max-width: 80%;
+  position: relative;
+  box-shadow: 0 1px 7px hsla(0, 0%, 0%, 0.2);
+}
+
+/* Corner Effect */
+.corners:after,
+.corners:before {
+  background: #e6e6e6;
+  content: '';
+  height: 50px;
+  position: absolute;
+  top: -25px;
+  width: 100px;
+  box-shadow: 0 5px 10px -7px hsla(0, 0% ,0%, 0.5);
+}
+.corners:after {
+  left: -50px;
+  transform: rotate(-45deg);
+}
+.corners:before {
+  right: -50px;
+  transform: rotate(45deg);
 }
