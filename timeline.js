@@ -34,8 +34,8 @@ function displayFullTimeline() {
         d3.selectAll('svg').remove();
 
         //size variables
-        var w = (data.length * 5) + 6;
-        var BAR_WIDTH = 5;
+        var w = (data.length * 3) + 6;
+        var BAR_WIDTH = 2;
         var maxSales = 0;
             for (var i=0; i<data.length; i++){
                 maxSales = Math.max(maxSales, data[i].Global_Sales)
